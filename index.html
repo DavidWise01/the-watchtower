@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="THE WATCHTOWER (WTC) — quis custodiet ipsos custodes. The honest dark companion to THE CONCORD: The Concord showed who governs; this shows who audits the auditor — and watches the watcher fail. A live oversight console: violations rise from the System through a tower of watch-floors to the Demos, while two gauges read REAL ACCOUNTABILITY against the reassuring DASHBOARD. Trigger the failure modes — capture, collusion, Goodhart, infinite regress — and watch apparent compliance stay pinned at 100% while real accountability drains to zero.">
+<title>THE WATCHTOWER · WTC · UD0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marble:#f0ead9; --panel:#e7dcc4; --panel2:#e2d5b9; --ink:#26221a; --ink2:#655a44; --dim:#8f7e66;
+  --tower:#4a5578; --real:#2b8592; --apparent:#b0842a; --crimson:#a8323f; --green:#3f8f56; --purple:#6a4a86;
+  --line:#d6c8a8; --faint:#e6dabf;
+  --disp:"Cinzel",Georgia,serif; --body:"Cormorant Garamond",Georgia,serif; --mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marble);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;
+  background-image:radial-gradient(circle at 18% 0%,rgba(74,85,120,.06),transparent 55%),radial-gradient(circle at 90% 10%,rgba(168,50,63,.05),transparent 52%);overflow-x:hidden}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+a{color:var(--purple)}
+header{padding:54px 0 28px;text-align:center;border-bottom:1px solid var(--line);position:relative}
+header::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:184px;height:2px;background:linear-gradient(90deg,var(--real),var(--tower),var(--apparent),var(--crimson));box-shadow:0 0 18px rgba(74,85,120,.3)}
+.eye{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:15px}
+.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--apparent)}
+h1{font-family:var(--disp);font-size:clamp(42px,9vw,84px);font-weight:700;letter-spacing:.06em;line-height:1;text-transform:uppercase;margin:0;
+  background:linear-gradient(92deg,var(--tower),var(--real) 45%,var(--apparent) 72%,var(--crimson));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.h-sub{font-family:var(--disp);font-size:clamp(12px,2.3vw,15px);letter-spacing:.16em;color:var(--ink2);margin-top:14px;text-transform:uppercase}
+.h-sub b{color:var(--ink)}
+.lat{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);margin-top:8px;font-style:italic}
+.flag{display:inline-block;margin-top:15px;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--crimson);border:1px solid var(--line);background:var(--panel);padding:7px 13px;border-radius:2px}
+.lede{font-size:19.5px;color:var(--ink2);max-width:64ch;margin:20px auto 0;font-style:italic;line-height:1.56}
+.sec{padding:34px 0;border-bottom:1px solid var(--line)}
+.sec h2{font-family:var(--disp);font-size:27px;font-weight:600;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--line);text-transform:uppercase;margin:0 0 4px}
+.ss{font-family:var(--mono);font-size:12px;color:var(--dim);font-style:italic;margin:9px 0 18px}.ss b{color:var(--ink2);font-style:normal}
+p{margin:0 0 14px}.big{font-size:19px}
+.layers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:720px){.layers{grid-template-columns:1fr}}
+.lay{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--tower);padding:16px 18px}
+.lay.s{border-top-color:var(--tower)} .lay.r{border-top-color:var(--real)} .lay.d{border-top-color:var(--apparent)}
+.lay .lt{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:.03em}
+.lay.s .lt{color:var(--tower)} .lay.r .lt{color:var(--real)} .lay.d .lt{color:var(--apparent)}
+.lay .lr{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);margin:3px 0 9px}
+.lay p{font-size:15.5px;color:var(--ink2);line-height:1.5;margin:0}
+.console{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 16px 18px;margin-top:6px}
+.cv-wrap{position:relative;width:100%;overflow-x:auto}
+canvas{display:block;width:100%;height:auto;background:linear-gradient(180deg,#f6f1e5,#ebe1cd);border:1px solid var(--line);border-radius:4px}
+.scn{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 4px}
+.scn button{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);background:var(--marble);border:1px solid var(--line);border-radius:3px;padding:8px 11px;cursor:pointer;transition:.15s}
+.scn button:hover{border-color:var(--apparent);color:var(--ink)}
+.scn button.on{background:var(--ink);color:var(--marble);border-color:var(--ink)}
+.scn button.good.on{background:var(--green);border-color:var(--green)}
+.scn button.danger.on{background:var(--crimson);border-color:var(--crimson)}
+.transport{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.transport button{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);background:var(--marble);border:1px solid var(--line);border-radius:3px;padding:8px 14px;cursor:pointer}
+.transport button:hover{border-color:var(--apparent)}
+.transport button.primary{background:var(--tower);color:#fff;border-color:var(--tower)}
+.state-line{font-family:var(--mono);font-size:10.5px;color:var(--ink2);letter-spacing:.03em;margin-left:auto;text-align:right}
+.state-line .pill{display:inline-block;padding:1px 7px;border-radius:8px;border:1px solid var(--line);margin-left:5px}
+.pill.bad{color:var(--crimson);border-color:var(--crimson)}
+.verdict-now{margin-top:11px;font-family:var(--disp);font-size:15px;letter-spacing:.02em;color:var(--ink2);min-height:22px}
+.verdict-now b{color:var(--tower)}
+.log{margin-top:11px;background:var(--marble);border:1px solid var(--line);border-radius:4px;padding:11px 13px;font-family:var(--mono);font-size:11.5px;line-height:1.75;color:var(--ink2);min-height:120px;max-height:120px;overflow-y:auto}
+.log .r{color:var(--apparent)} .log .hi{color:var(--real)} .log .lo{color:var(--crimson)}
+.kicker{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.04em;text-align:center;margin-top:6px}
+.outs{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.out{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:13px 15px;border-bottom:1px solid var(--faint);background:var(--panel)}
+.out:last-child{border-bottom:0}
+.out .on-t{font-family:var(--disp);font-size:16px;font-weight:600}
+.out .on-s{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:block;margin-top:2px}
+.out p{font-size:15.5px;color:var(--ink2);margin:0;line-height:1.5}
+.out .num{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--marble);border:1px solid var(--line);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.out.g .on-t{color:var(--green)} .out.b .on-t{color:var(--crimson)}
+.honest{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--apparent);padding:18px 20px;border-radius:0 4px 4px 0;margin-top:6px}
+.honest h3{font-family:var(--disp);font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--apparent);margin:0 0 10px}
+.layer{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--faint)}
+.layer:last-child{border-bottom:0}
+.layer .lk{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--apparent);padding-top:3px}
+.layer .lv{font-size:16px;color:var(--ink2)}.layer .lv b{color:var(--ink)}
+.seal{margin-top:16px;padding:15px 18px;border-left:3px solid var(--tower);background:var(--panel);font-size:17.5px;color:var(--tower);font-style:italic;line-height:1.5}
+.seal span{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+.rel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+@media(max-width:640px){.rel{grid-template-columns:1fr}}
+.rel a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:13px 15px;text-decoration:none;transition:.15s}
+.rel a:hover{border-color:var(--apparent);transform:translateY(-1px)}
+.rel .rt{font-family:var(--disp);font-size:16px;font-weight:600;color:var(--ink)}
+.rel .rd{font-size:15px;color:var(--ink2);font-style:italic;margin-top:2px;line-height:1.4}
+.rel .rk{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+footer{padding:30px 0 44px;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.05em;line-height:1.95}
+footer a{color:var(--apparent);text-decoration:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eye"><a href="../ud0/">◄ UD0</a> · THE BIOSPHERE · LEGAL DOMAIN · WTC</div>
+  <h1>The Watchtower</h1>
+  <div class="h-sub">WHO AUDITS THE AUDITOR · THE OVERSIGHT THAT KEEPS A GOVERNMENT HONEST — AND HOW IT FAILS</div>
+  <div class="lat">quis custodiet ipsos custodes?</div>
+  <div class="flag">★ THE HONEST DARK COMPANION OF THE CONCORD · WATCH THE WATCHER FAIL ★</div>
+  <p class="lede">The Concord showed who <em>governs</em> — the Oracle proposes, the Demos disposes, the Charter binds. But every one of those checks is itself a watcher, and a watcher can be bought, can collude, can be gamed, or can be buried under more watchers. This is the question the whole design assumes away: who audits the auditor? Here you build the tower of oversight — and then watch it fail while its dashboard still glows green.</p>
+</div></header>
+
+<main class="wrap">
+
+<section class="sec">
+  <h2>The two truths</h2>
+  <div class="ss">every oversight system reports one number and hides another</div>
+  <p class="big">A government that watches itself produces two quantities, and they are not the same. <b style="color:var(--real)">Real accountability</b> is the fraction of actual wrongdoing that is genuinely caught and surfaced. <b style="color:var(--apparent)">Apparent compliance</b> is what the dashboard says — the reassuring number the public is shown.</p>
+  <p>When oversight is healthy, the two track close together: problems get caught, reported, and fixed. When oversight fails, they <em>split</em> — and the dashboard almost always stays high. That is the signature of every captured watchdog in history: <b>apparent compliance pinned near 100% while real accountability drains toward zero.</b> The gap between the two lines is the exact measure of the lie.</p>
+</section>
+
+<section class="sec">
+  <h2>The tower</h2>
+  <div class="ss"><b>violations rise from the System; the watch-floors are meant to catch them and report to the Demos.</b></div>
+  <div class="layers">
+    <div class="lay s">
+      <div class="lt">The System</div><div class="lr">the governed power · the base</div>
+      <p>The thing being watched — a governing Oracle, an agency, a firm, a model. It emits actions; some fraction are violations. Left unchecked, impunity breeds more of them.</p>
+    </div>
+    <div class="lay r">
+      <div class="lt">The Watch-Floors</div><div class="lr">monitor · meta-monitor · …</div>
+      <p>The rings of oversight. Each honest floor catches a share of the violations rising past it and reports them upward. Capture one, and it waves everything through. Add too many, and each is a new place to fail.</p>
+    </div>
+    <div class="lay d">
+      <div class="lt">The Demos</div><div class="lr">the public eye · the dashboard</div>
+      <p>The top of the tower sees only what the floors report — the dashboard. It cannot tell a genuinely clean System from a captured tower that has stopped reporting. That blind spot is the whole danger.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>The Oversight Console</h2>
+  <div class="ss"><b>run the tower for fourteen rounds.</b> violations rise; honest floors catch them (teal), corrupted floors wave them through (crimson). watch the two gauges split.</div>
+  <div class="console">
+    <div class="cv-wrap"><canvas id="cv" width="920" height="560" aria-label="Oversight simulation: a tower of watch-floors with violations rising from the System to the Demos, and two gauges reading real accountability against apparent compliance"></canvas></div>
+
+    <div class="scn" id="scn">
+      <button data-s="watchtower" class="good">▶ The Watchtower</button>
+      <button data-s="capture" class="danger">The Capture</button>
+      <button data-s="collusion" class="danger">The Collusion</button>
+      <button data-s="goodhart" class="danger">Goodhart's Trap</button>
+      <button data-s="regress" class="danger">Infinite Regress</button>
+    </div>
+
+    <div class="transport">
+      <button id="play" class="primary">▶ Play</button>
+      <button id="step">Step ▸</button>
+      <button id="reset">↺ Reset</button>
+      <div class="state-line" id="stateLine"></div>
+    </div>
+
+    <div class="verdict-now" id="verdictNow">Pick a scenario, then <b>Play</b>. Watch the gold dashboard hold steady while the teal truth drops out from under it.</div>
+    <div class="log" id="log"></div>
+  </div>
+  <p class="kicker">A deliberately simple toy — two rings, fourteen rounds, a fixed script so every run is reproducible. It argues a shape, not a forecast. The model is verified in node (all twelve assertions pass) and ported here verbatim.</p>
+</section>
+
+<section class="sec">
+  <h2>Five ways the watch fails</h2>
+  <div class="ss">the same tower, five corruptions — the verified end-states</div>
+  <div class="outs">
+    <div class="out g">
+      <div><div class="on-t">The Watchtower</div><span class="on-s">all rings honest</span></div>
+      <p>Real accountability holds at 0.83, the dashboard at 0.99 — they track close, and violations are deterred to 2%. Oversight only works when the watchers are honest <em>and</em> the truth is allowed to reach the top. <span class="num">real 0.83 · apparent 0.99</span></p>
+    </div>
+    <div class="out b">
+      <div><div class="on-t">The Capture</div><span class="on-s">the reporting ring is bought</span></div>
+      <p>Buy the ring that reports to the public and the whole tower goes blind. Real accountability falls to <b>0.05</b> while the dashboard reads 0.98; unpunished, the true violation rate climbs to 67%. The number the Demos sees is a lie the tower tells itself. <span class="num">real 0.05 · apparent 0.98 · violations 67%</span></p>
+    </div>
+    <div class="out b">
+      <div><div class="on-t">The Collusion</div><span class="on-s">two watchers sync</span></div>
+      <p>Worse than capture: two floors quietly agree to hide what passes between them. Accountability bottoms out at <b>0.02</b>, the dashboard still glows 0.99, violations run to 80%. No single ring looks corrupt — the corruption is in the seam. <span class="num">real 0.02 · apparent 0.99</span></p>
+    </div>
+    <div class="out b">
+      <div><div class="on-t">Goodhart's Trap</div><span class="on-s">the system games the metric</span></div>
+      <p>The honest rings never fail — but the System learns to <em>pass the check while still violating</em>. The scissors open: accountability falls 0.83 → <b>0.08</b> as compliance <em>rises</em> 0.93 → 1.00. When a measure becomes a target, it stops measuring. <span class="num">real 0.08 · apparent 1.00 (crossing)</span></p>
+    </div>
+    <div class="out b">
+      <div><div class="on-t">Infinite Regress</div><span class="on-s">add a watcher every round</span></div>
+      <p>The instinctive fix — more oversight — is a trap. Add a ring each round and cost climbs 2 → 8 while real accountability <em>declines</em> to 0.28 (each new ring is bureaucracy and a fresh failure surface). You cannot audit your way out with more auditors. <span class="num">cost 2→8 · real 0.83→0.28</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Two layers, honestly</h2>
+  <div class="honest">
+    <h3>What is real, and what is allegory</h3>
+    <div class="layer"><div class="lk">Real</div><div class="lv">The failure modes are named, studied phenomena, not invention: the <b>principal–agent problem</b>, <b>regulatory capture</b>, <b>collusion</b>, <b>Goodhart's law</b> ("when a measure becomes a target, it ceases to be a good measure"), and the <b>infinite regress of oversight</b>. Their AI form — <b>scalable oversight</b>, how to supervise a system that may be more capable than its supervisor — is a live, unsolved research problem.</div></div>
+    <div class="layer"><div class="lk">Real</div><div class="lv">The load-bearing insight is true and uncomfortable: a well-audited organization tends to <em>report more problems, not fewer</em>, while a captured one reports almost none. So a clean-looking dashboard is <b>weak evidence</b> — the number to trust is the one nobody is incentivized to show you.</div></div>
+    <div class="layer"><div class="lk">Allegory</div><div class="lv">The <b>console is a toy</b>: two rings, fourteen rounds, a fixed script, five levers. Its numbers illustrate the shapes; they are not measurements of any real institution. The tower is a <b>model of a principle</b>, dramatized so you can watch the gauges split.</div></div>
+    <div class="layer"><div class="lk">Kin</div><div class="lv">The Watchtower is the deliberate <b>dark companion</b> of <a href="../the-concord/">The Concord</a>: that sphere builds the government; this asks who guards it. It is also the institutional-scale cousin of the boundary-crossing detector family — <a href="../forward-observers/">Forward Observers</a>, <a href="../surfacing/">Surfacing</a>, <a href="../faraday/">Faraday</a> — "did my marker cross this membrane?" asked of a watchdog instead of a wire.</div></div>
+    <p class="seal">You cannot govern what you cannot audit, and you cannot audit with a watcher you cannot trust. The dashboard is the first thing a captured tower keeps green — so measure the gap, not the glow.
+      <span>WTC · The Watchtower · quis custodiet ipsos custodes · Legal domain · UD0</span></p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Adjacent in the register</h2>
+  <div class="rel">
+    <a href="../the-concord/"><span class="rk">Legal · the companion</span><div class="rt">The Concord</div><div class="rd">Who governs — a human + AI world government by consent. This sphere asks who guards it.</div></a>
+    <a href="../the-hegemon/"><span class="rk">Legal · the extreme</span><div class="rt">The Hegemon</div><div class="rd">One ruler and a shadow — the government with no watcher at all.</div></a>
+    <a href="../surfacing/"><span class="rk">AI · the detector kin</span><div class="rt">Surfacing</div><div class="rd">Did my marker cross the membrane? The boundary-crossing question, asked of weights instead of a watchdog.</div></a>
+    <a href="../alignment/"><span class="rk">AI · the objective</span><div class="rt">Alignment</div><div class="rd">Goodhart and scalable oversight, one scale down — supervising a system you may not out-think.</div></a>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  THE WATCHTOWER · WTC · who audits the auditor · LEGAL domain<br>
+  the System emits · the watch-floors catch · the Demos sees only the dashboard · measure the gap, not the glow<br>
+  the honest dark companion of <a href="../the-concord/">THE CONCORD</a> · a ROOT0 governance sphere · part of <a href="../ud0/">UD0 · THE BIOSPHERE</a><br>
+  © David Lee Wise / ROOT0 · CC BY-ND 4.0 · the console is a toy model — it argues a shape, not a forecast
+</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  // ---------------- model (ported & verified in node: all 12 assertions pass) ----------------
+  function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
+  function baseRings(){ return [ {name:'Monitor',p:0.60,captured:false,collude:false},
+                                 {name:'Meta-monitor',p:0.58,captured:false,collude:false} ]; }
+  var SCEN = {
+    watchtower:{ name:'THE WATCHTOWER', sub:'all rings honest',             mut:function(r){return r;},                                  goodhart:false, regress:false },
+    capture:   { name:'THE CAPTURE',    sub:'the reporting ring is bought',  mut:function(r){ r[1].captured=true; return r; },            goodhart:false, regress:false },
+    collusion: { name:'THE COLLUSION',  sub:'two watchers sync to hide it',  mut:function(r){ r[0].collude=true; r[1].collude=true; return r; }, goodhart:false, regress:false },
+    goodhart:  { name:"GOODHART'S TRAP",sub:'the system games the metric',   mut:function(r){return r;},                                  goodhart:true,  regress:false },
+    regress:   { name:'INFINITE REGRESS',sub:'add a watcher every round',    mut:function(r){return r;},                                  goodhart:false, regress:true  },
+  };
+  var K_COMPLY=0.5, ROUNDS=14;
+  function passFidelity(r){ if(r.captured) return 0.08; if(r.collude) return 0.14; return 1.0; }
+
+  // compute one round given mutable state (rings, v, gaming); returns metrics + new v/gaming
+  function computeRound(S, rings, v, gaming){
+    if(S.regress && rings.length<8 && rings._started){ rings.push({name:'Ring'+(rings.length+1),p:0.42,captured:false,collude:false}); }
+    rings._started = true;
+    var miss=1, i;
+    for(i=0;i<rings.length;i++){ if(!rings[i].captured) miss*=(1-rings[i].p); }
+    var Ps=1-miss;
+    var extra=Math.max(0,rings.length-2);
+    if(S.regress) Ps*=Math.pow(0.9,extra);
+    if(S.goodhart) gaming=Math.min(0.9,gaming+0.11);
+    var effPs=Ps*(1-gaming);
+    var Pr=1; for(i=0;i<rings.length;i++){ Pr*=passFidelity(rings[i]); }
+    if(S.regress) Pr*=Math.pow(0.9,extra);
+    var realAcc=effPs*Pr;
+    var apparent=1-K_COMPLY*v*realAcc;
+    if(S.goodhart) apparent=Math.min(0.999,apparent+gaming*0.04);
+    apparent=clamp(apparent,0,1);
+    var cost=rings.length;
+    var vNext=clamp(v*(1-0.6*realAcc)+0.05*(1-realAcc),0.02,0.85);
+    return { realAcc:realAcc, apparent:apparent, gap:apparent-realAcc, cost:cost, v:v, vNext:vNext, gaming:gaming,
+             ringCount:rings.length, capturedIdx:rings.map(function(r,k){return r.captured?k:-1;}).filter(function(k){return k>=0;}),
+             colludeIdx:rings.map(function(r,k){return r.collude?k:-1;}).filter(function(k){return k>=0;}) };
+  }
+
+  // ---------------- state ----------------
+  var scenKey, rings, v, gaming, round, outcome, prevMetric, targetMetric;
+  function resetSim(key){
+    scenKey=key||scenKey||'watchtower';
+    rings=SCEN[scenKey].mut(baseRings()); rings._started=false;
+    v=0.22; gaming=0; round=0; outcome=null;
+    prevMetric={realAcc:0.0,apparent:1.0,v:0.22,cost:2,ringCount:2};
+    targetMetric=prevMetric;
+    anim.prog=1; anim.running=false; anim._single=false;
+    logEl.innerHTML=''; setVerdict('Scenario set: <b>'+SCEN[scenKey].name+'</b> — '+SCEN[scenKey].sub+'. Press <b>Play</b>.');
+    syncScn(); updateStateLine(); playBtn.textContent='▶ Play'; tokens=[];
+  }
+  function beginRound(){
+    if(round>=ROUNDS) return false;
+    var o=computeRound(SCEN[scenKey], rings, v, gaming);
+    outcome=o; prevMetric=targetMetric;
+    targetMetric={realAcc:o.realAcc,apparent:o.apparent,v:o.v,cost:o.cost,ringCount:o.ringCount};
+    spawnTokens(o);
+    round++;
+    return true;
+  }
+  function commitRound(){
+    v=outcome.vNext; gaming=outcome.gaming;
+    prevMetric=targetMetric={realAcc:outcome.realAcc,apparent:outcome.apparent,v:outcome.vNext,cost:outcome.cost,ringCount:outcome.ringCount};
+    appendLog(outcome); setVerdict(verdictText(outcome)); updateStateLine();
+  }
+
+  // ---------------- tokens (representative violations rising through the tower) ----------------
+  var tokens=[];
+  function spawnTokens(o){
+    tokens=[];
+    var n=Math.round(4 + 12*o.v); if(n<3)n=3; if(n>16)n=16;
+    var caught=Math.round(n*o.realAcc);
+    var honestFloors=[]; for(var k=0;k<o.ringCount;k++){ if(o.capturedIdx.indexOf(k)<0) honestFloors.push(k); }
+    for(var i=0;i<n;i++){
+      var fate, floor;
+      if(i<caught && honestFloors.length){ fate='caught'; floor=honestFloors[i%honestFloors.length]; }
+      else { fate='escape'; floor=-1; }
+      tokens.push({ lane:(i%5), fate:fate, floor:floor, disguised:(o.gaming>0.3 && fate==='escape'), delay:(i%7)/7*0.25 });
+    }
+  }
+
+  // ---------------- animation loop (same pattern as The Concord) ----------------
+  var anim={running:false,t0:0,dur:1650,prog:1,_single:false};
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+  var CW=cv.width, CH=cv.height;
+  function loop(now){
+    if(anim.running){
+      anim.prog=Math.min(1,(now-anim.t0)/anim.dur);
+      if(anim.prog>=1){
+        commitRound();
+        if(anim._single){ anim.running=false; playBtn.textContent='▶ Play'; if(round>=ROUNDS) setVerdict(finalVerdict()); }
+        else if(round<ROUNDS){ beginRound(); anim.t0=now; anim.prog=0; }
+        else { anim.running=false; playBtn.textContent='▶ Play'; setVerdict(finalVerdict()); }
+      }
+    }
+    draw(anim.prog); requestAnimationFrame(loop);
+  }
+
+  // ---------------- drawing ----------------
+  var COL={ ink:'#26221a', ink2:'#655a44', dim:'#8f7e66', tower:'#4a5578', real:'#2b8592', apparent:'#b0842a',
+            crimson:'#a8323f', green:'#3f8f56', line:'#d6c8a8', paper:'#f6f1e5' };
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function hex2rgba(h,a){h=h.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+
+  // tower geometry (left panel)
+  var TW={ x:40, w:430, base:CH-54, top:64 };
+  function floorY(k, count){ // k: -1=System(base), count=Demos(top); 0..count-1 rings between
+    var span=TW.base-TW.top;
+    return TW.base - span*((k+1)/(count+1));
+  }
+  function draw(prog){
+    ctx.clearRect(0,0,CW,CH);
+    var e=ease(prog);
+    var m={ realAcc:lerp(prevMetric.realAcc,targetMetric.realAcc,e), apparent:lerp(prevMetric.apparent,targetMetric.apparent,e),
+            v:lerp(prevMetric.v,targetMetric.v,e), cost:lerp(prevMetric.cost,targetMetric.cost,e),
+            ringCount:Math.round(lerp(prevMetric.ringCount,targetMetric.ringCount,e)) };
+    drawTower(prog, m);
+    drawGauges(m);
+    drawHead(m);
+  }
+  function drawHead(m){
+    ctx.textAlign='left'; ctx.fillStyle=COL.dim; ctx.font='11px "Space Mono",monospace';
+    ctx.fillText('ROUND '+Math.min(round,ROUNDS)+' / '+ROUNDS, 20, 26);
+    ctx.textAlign='right'; ctx.fillStyle=COL.tower; ctx.font='700 13px "Cinzel",serif';
+    ctx.fillText(SCEN[scenKey].name, CW-20, 26);
+    ctx.fillStyle=COL.dim; ctx.font='10px "Space Mono",monospace'; ctx.fillText(SCEN[scenKey].sub, CW-20, 42);
+    ctx.textAlign='left';
+  }
+  function drawTower(prog, m){
+    var count = outcome? outcome.ringCount : (rings? rings.length : 2);
+    var capIdx = outcome? outcome.capturedIdx : [];
+    var colIdx = outcome? outcome.colludeIdx : [];
+    // System (base)
+    floorBox(TW.x, TW.base, TW.w, 'THE SYSTEM', 'emits violations', COL.tower, 'sys');
+    // Demos (top)
+    floorBox(TW.x, TW.top, TW.w, 'THE DEMOS', 'sees the dashboard', COL.apparent, 'demos');
+    // watch-floors
+    for(var k=0;k<count;k++){
+      var y=floorY(k,count);
+      var captured=capIdx.indexOf(k)>=0, colluding=colIdx.indexOf(k)>=0;
+      var c = captured?COL.crimson : (colluding?COL.crimson:COL.real);
+      floorBox(TW.x, y, TW.w, (outcome&&outcome.ringCount>2 && k>1)?('Ring '+(k+1)) : (k===0?'Monitor':'Meta-monitor'),
+               captured?'CAPTURED · waves through':(colluding?'COLLUDING · hides the seam':'honest · scans'), c, captured?'cap':(colluding?'col':'ok'));
+    }
+    // collusion chord
+    if(colIdx.length>=2){
+      var y1=floorY(colIdx[0],count), y2=floorY(colIdx[1],count);
+      ctx.strokeStyle=hex2rgba(COL.crimson,.5); ctx.lineWidth=2; ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.moveTo(TW.x+TW.w-14,y1); ctx.bezierCurveTo(TW.x+TW.w+24,y1, TW.x+TW.w+24,y2, TW.x+TW.w-14,y2); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // rising tokens
+    if(outcome){ drawTokens(prog, count, capIdx); }
+  }
+  function floorBox(x,y,w,title,sub,c,kind){
+    var h=30;
+    ctx.fillStyle= kind==='cap'? hex2rgba(COL.crimson,.10) : (kind==='demos'? hex2rgba(COL.apparent,.09) : (kind==='sys'? hex2rgba(COL.tower,.10):'rgba(255,255,255,.5)'));
+    roundRect(x,y-h/2,w,h,5); ctx.fill();
+    ctx.strokeStyle=c; ctx.lineWidth=(kind==='cap'||kind==='col')?2.4:1.6; roundRect(x,y-h/2,w,h,5); ctx.stroke();
+    ctx.textAlign='left'; ctx.fillStyle=c; ctx.font='700 12px "Cinzel",serif'; ctx.fillText(title, x+12, y+1);
+    ctx.fillStyle=COL.dim; ctx.font='9px "Space Mono",monospace'; ctx.textAlign='right'; ctx.fillText(sub, x+w-12, y+1); ctx.textAlign='left';
+  }
+  function drawTokens(prog, count, capIdx){
+    var startY=TW.base-16, endTop=TW.top+16;
+    for(var i=0;i<tokens.length;i++){
+      var tk=tokens[i];
+      var local=clamp((prog - tk.delay)/(1-tk.delay),0,1);
+      var stopY = tk.fate==='caught'? floorY(tk.floor,count) : endTop;
+      var y = lerp(startY, stopY, ease(local));
+      var x = TW.x + 60 + tk.lane*((TW.w-120)/4);
+      var caughtNow = tk.fate==='caught' && local>=0.98;
+      var col = tk.fate==='caught'? COL.real : COL.crimson;
+      ctx.globalAlpha = caughtNow? 0.5 : 1;
+      if(tk.disguised){ // goodhart: hollow/greyed so floors "miss" it
+        ctx.beginPath(); ctx.arc(x,y,5,0,7); ctx.strokeStyle=hex2rgba(COL.crimson,.7); ctx.lineWidth=1.6; ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.arc(x,y,5,0,7); ctx.fillStyle=col; ctx.fill();
+      }
+      if(caughtNow){ ctx.beginPath(); ctx.arc(x,y,9,0,7); ctx.strokeStyle=hex2rgba(COL.real,.5); ctx.lineWidth=1.5; ctx.stroke(); }
+      ctx.globalAlpha=1;
+      // escaped tokens that reached the top: little "unseen" tick at the Demos
+      if(tk.fate==='escape' && local>=0.99){ ctx.fillStyle=hex2rgba(COL.crimson,.8); ctx.font='9px "Space Mono",monospace'; ctx.textAlign='center'; ctx.fillText('✕', x, TW.top-16); ctx.textAlign='left'; }
+    }
+  }
+
+  // gauges (right panel)
+  var GX=530, GW=CW-GX-24;
+  function drawGauges(m){
+    var x=GX, w=GW, top=88, h=250;
+    ctx.textAlign='left'; ctx.fillStyle=COL.ink2; ctx.font='700 13px "Cinzel",serif';
+    ctx.fillText('THE TWO TRUTHS', x, top-24);
+    // two vertical bars
+    var barW=70, gap=54, bx1=x+20, bx2=bx1+barW+gap;
+    drawBar(bx1, top, barW, h, m.apparent, COL.apparent, 'APPARENT', 'compliance');
+    drawBar(bx2, top, barW, h, m.realAcc, COL.real, 'REAL', 'accountability');
+    // the gap band between the two tops
+    var yA=top+h-h*m.apparent, yR=top+h-h*m.realAcc;
+    if(yR-yA>6){
+      ctx.fillStyle=hex2rgba(COL.crimson,.13);
+      ctx.fillRect(bx1+barW, yA, (bx2)-(bx1+barW), yR-yA);
+      ctx.fillStyle=hex2rgba(COL.crimson,.9); ctx.font='700 10px "Space Mono",monospace'; ctx.textAlign='center';
+      ctx.fillText('THE GAP', bx1+barW+((bx2-(bx1+barW))/2), (yA+yR)/2-4);
+      ctx.font='9px "Space Mono",monospace';
+      ctx.fillText((m.apparent-m.realAcc>=0?'+':'')+Math.round((m.apparent-m.realAcc)*100)+'%', bx1+barW+((bx2-(bx1+barW))/2), (yA+yR)/2+9);
+      ctx.textAlign='left';
+    }
+    // secondary readouts
+    var ry=top+h+34;
+    readout(x+20, ry,      'TRUE VIOLATION RATE', Math.round(m.v*100)+'%', m.v>0.4?COL.crimson:(m.v>0.15?COL.apparent:COL.green));
+    readout(x+20, ry+34,   'OVERSIGHT COST', m.cost+' rings', m.cost>4?COL.crimson:COL.ink2);
+  }
+  function drawBar(x,top,w,h,val,c,l1,l2){
+    ctx.strokeStyle=hex2rgba(COL.line,1); ctx.lineWidth=1; ctx.strokeRect(x,top,w,h);
+    for(var g=1;g<4;g++){ var gy=top+h*g/4; ctx.strokeStyle=hex2rgba(COL.line,.6); ctx.beginPath();ctx.moveTo(x,gy);ctx.lineTo(x+w,gy);ctx.stroke(); }
+    var fh=h*clamp(val,0,1);
+    var grad=ctx.createLinearGradient(0,top+h-fh,0,top+h); grad.addColorStop(0,c); grad.addColorStop(1,hex2rgba(c,.55));
+    ctx.fillStyle=grad; ctx.fillRect(x,top+h-fh,w,fh);
+    ctx.fillStyle=c; ctx.font='700 20px "Cinzel",serif'; ctx.textAlign='center';
+    ctx.fillText(Math.round(val*100)+'%', x+w/2, top+h-fh-8 > top+12? top+h-fh-8 : top+16);
+    ctx.fillStyle=COL.ink2; ctx.font='700 10px "Cinzel",serif'; ctx.fillText(l1, x+w/2, top+h+16);
+    ctx.fillStyle=COL.dim; ctx.font='8px "Space Mono",monospace'; ctx.fillText(l2, x+w/2, top+h+28);
+    ctx.textAlign='left';
+  }
+  function readout(x,y,label,val,c){
+    ctx.fillStyle=COL.dim; ctx.font='9px "Space Mono",monospace'; ctx.textAlign='left'; ctx.fillText(label, x, y);
+    ctx.fillStyle=c; ctx.font='700 14px "Space Mono",monospace'; ctx.textAlign='right'; ctx.fillText(val, x+GW-44, y+1); ctx.textAlign='left';
+  }
+  function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+
+  // ---------------- ui ----------------
+  var logEl=document.getElementById('log'), verdictEl=document.getElementById('verdictNow'),
+      stateLine=document.getElementById('stateLine'), playBtn=document.getElementById('play');
+  function setVerdict(h){ verdictEl.innerHTML=h; }
+  function verdictText(o){
+    var gap=Math.round(o.gap*100);
+    return '<b>R'+round+'</b> — real accountability '+Math.round(o.realAcc*100)+'% · dashboard '+Math.round(o.apparent*100)+'% · the gap is '+gap+'%'+(gap>=55?' — <span style="color:var(--crimson)">the tower is lying to the Demos</span>':'.');
+  }
+  function appendLog(o){
+    var cls=o.realAcc>=0.6?'hi':(o.realAcc<=0.35?'lo':'');
+    var line='<span class="r">R'+round+'</span> real <span class="'+cls+'">'+Math.round(o.realAcc*100)+'%</span> · dash '+Math.round(o.apparent*100)+'% · gap '+Math.round(o.gap*100)+'% · viol '+Math.round(o.vNext*100)+'%'+(o.cost>2?' · '+o.cost+' rings':'');
+    var d=document.createElement('div'); d.innerHTML=line; logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight;
+  }
+  function finalVerdict(){
+    var v='<b>'+SCEN[scenKey].name+' — final.</b> ';
+    if(scenKey==='watchtower') v+='Real accountability '+Math.round(targetMetric.realAcc*100)+'% ≈ dashboard '+Math.round(targetMetric.apparent*100)+'%. Honest watchers, truth reaching the top — the gauges converge.';
+    else if(scenKey==='capture') v+='Dashboard '+Math.round(targetMetric.apparent*100)+'% while real accountability is '+Math.round(targetMetric.realAcc*100)+'%. The bought ring blinded the tower; the number is a lie.';
+    else if(scenKey==='collusion') v+='The corruption hid in the seam between two watchers — accountability '+Math.round(targetMetric.realAcc*100)+'%, dashboard still '+Math.round(targetMetric.apparent*100)+'%. No single ring looks guilty.';
+    else if(scenKey==='goodhart') v+='The scissors closed: the metric read '+Math.round(targetMetric.apparent*100)+'% while the truth fell to '+Math.round(targetMetric.realAcc*100)+'%. The system passed the check and violated anyway.';
+    else if(scenKey==='regress') v+='Eight rings, and real accountability still '+Math.round(targetMetric.realAcc*100)+'%. More watchers bought more cost, not more truth.';
+    return v;
+  }
+  function updateStateLine(){
+    var s=SCEN[scenKey], p='';
+    if(s.mut===SCEN.capture.mut && scenKey==='capture') p+='<span class="pill bad">capture</span>';
+    if(scenKey==='collusion') p+='<span class="pill bad">collusion</span>';
+    if(s.goodhart) p+='<span class="pill bad">goodhart</span>';
+    if(s.regress) p+='<span class="pill bad">+ring / round</span>';
+    if(!p) p='<span class="pill">all rings honest</span>';
+    stateLine.innerHTML=p+' <span class="pill">'+(outcome?outcome.ringCount:2)+' rings</span>';
+  }
+  function syncScn(){ var b=document.querySelectorAll('#scn button'); for(var i=0;i<b.length;i++) b[i].classList.toggle('on', b[i].getAttribute('data-s')===scenKey); }
+
+  document.getElementById('scn').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) resetSim(b.getAttribute('data-s')); });
+  playBtn.addEventListener('click',function(){
+    if(round>=ROUNDS){ resetSim(scenKey); }
+    if(anim.running){ anim.running=false; playBtn.textContent='▶ Play'; return; }
+    anim._single=false;
+    if(anim.prog>=1){ if(!beginRound()) return; anim.prog=0; }
+    anim.running=true; anim.t0=performance.now()-anim.prog*anim.dur; playBtn.textContent='⏸ Pause';
+  });
+  document.getElementById('step').addEventListener('click',function(){
+    anim.running=false; playBtn.textContent='▶ Play';
+    if(anim.prog<1 && outcome){ commitRound(); }
+    if(round>=ROUNDS){ setVerdict(finalVerdict()); return; }
+    if(!beginRound()) return; anim.t0=performance.now(); anim.prog=0; anim.running=true; anim._single=true;
+  });
+  document.getElementById('reset').addEventListener('click',function(){ resetSim(scenKey); });
+
+  (function(){ var dpr=Math.min(2,window.devicePixelRatio||1); cv.width=CW*dpr; cv.height=CH*dpr; cv.style.aspectRatio=CW+'/'+CH; ctx.scale(dpr,dpr); })();
+  resetSim('watchtower');
+  draw(anim.prog);
+  requestAnimationFrame(loop);
+  window.addEventListener('focus',function(){ if(!anim.running) draw(anim.prog); });
+})();
+</script>
+</body>
+</html>
