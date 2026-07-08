@@ -1,0 +1,9 @@
+ROOT0-DLW-CHAIN-v1
+index : 491
+slug  : the-watchtower
+seal  : 9e151e4b9d37554ad35bb3ff256f30c654c2c9252bd9bc5e94a51ec57074a65b
+prev  : f5d2ca04cb3c0878630532a28fb8c415c9bf887420961bc116bf60d58b02f40b
+link  : 0b86eeec3c8d6db3eb3a2c06af002137d6b47e3adba290e115390e63511e225c
+head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+
+— the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
